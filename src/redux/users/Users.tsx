@@ -12,7 +12,6 @@ export const getUsersFromServer = createAsyncThunk(
 export const createANewUser = createAsyncThunk(
   "users/createANewUser",
   async (userBody) => {
-    console.log("nnnn : ", userBody);
     return fetch("/api/user", {
       method: "POST",
       body: JSON.stringify(userBody),
@@ -104,60 +103,3 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-// interface User {
-//     firstName: "",
-//     lastName: "",
-//     userName: "",
-//     userCode: "",
-//     fathersName: "",
-//     school: "",
-//     age: "",
-//     grade: "",
-//     phoneNumber: "",
-//     password: "",
-//     password2: "",
-//     img: ""
-//   }
-
-//   type Actions = {
-//     type:string,
-//     payload:string
-//   }
-
-// export const AddUserAction = (user:User)=>{
-//     return{
-//         type:"ADD_USER",
-//         payload:user
-//     }
-// }
-// export const UpdateUserAction = (user:User)=>{
-//     return{
-//         type:"UPDATE_USER",
-//         payload:user
-//     }
-// }
-// export const DeleteUserAction = (id:number)=>{
-//     return{
-//         type:"DELETE_USER",
-//         payload:id
-//     }
-// }
-
-// const UserReducer=(state:User[], action:Actions)=>{
-//     switch(action.type){
-//         case "DELETE_USER":{
-
-//         }
-//         case "ADD_USER":{
-
-//         }
-//         case "UPDATE_USER":{
-
-//         }
-//         case Default:{
-//            return state;
-//         }
-//     }
-
-// }
-// export default UserReducer;
