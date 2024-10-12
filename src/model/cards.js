@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import courseModel from './course'
 
 const schema = mongoose.Schema({
     category: {
@@ -14,6 +15,11 @@ const schema = mongoose.Schema({
         type:String,
         required: true,
     },
+    course : {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: COURSE,
+    }
 
 })
 

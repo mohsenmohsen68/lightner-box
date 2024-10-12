@@ -14,11 +14,7 @@ const schema = mongoose.Schema({
         type:String,
         required: true,
     },
-    card:{
-        type: mongoose.type.objectID,
-        ref : CARD,
-        required: true,
-    }
+    
 
 })
 
