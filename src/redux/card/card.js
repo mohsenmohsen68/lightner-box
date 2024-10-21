@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getCardsFromServer = createAsyncThunk(
   "cards/getCardsFromServer",
-  async (url: string) => {
+  async (url) => {
     return fetch(url)
       .then((res) => res.json())
       .then((data) => data);

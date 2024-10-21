@@ -1,7 +1,12 @@
-export default function Home() {
+import Header from './../components/header/Header'
+
+const Home=()=> {
   return (
-    <div className='w-full h-full flex justify-center items-center bg-red-300'>
+    <div >
+      <Header />
       welcome to lightener box
     </div>
   )
 }
+
+export default Home

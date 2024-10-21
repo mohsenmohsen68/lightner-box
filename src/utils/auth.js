@@ -4,7 +4,9 @@ import { sign, verify } from 'jsonwebtoken'
 
 
 const hashedPassword = async(password) =>{
+    console.log("password : ",password)
     const myHashedPassword = await hash(password,12)
+    console.log("hash password : ",hashedPassword)
     return myHashedPassword
 }
 

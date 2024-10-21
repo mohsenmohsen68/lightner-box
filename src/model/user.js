@@ -11,10 +11,17 @@ const schema = mongoose.Schema({
         required: true,
     },
     phoneNumber : {
-        type:String,
+        type: String,
         required: true,
     },
-    
+    password:{
+        type: String,
+        required: true,
+    },
+    role: {
+        type: String,
+        required : true,
+    }
 
 })
 

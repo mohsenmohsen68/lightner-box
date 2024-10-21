@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./users/Users"
-import cardReducer from "./card/card"
+import userReducer from "@/redux/users/Users"
+import cardReducer from "@/redux/card/card"
 
 
 
@@ -8,6 +8,8 @@ const store = configureStore({
     reducer:{
         user: userReducer,
         card: cardReducer,
+        
+
     }
 })
 

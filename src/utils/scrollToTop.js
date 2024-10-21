@@ -1,10 +1,8 @@
-'use client'
-import { Hidden } from '@mui/material';
 import React,{useEffect, useState} from 'react'
 import { IoIosArrowUp } from "react-icons/io";
 
 export default function ScrollToTop() {
-    const [showScrollIcon,setShowScrollIcon] = useState<boolean>(false)
+    const [showScrollIcon,setShowScrollIcon] = useState(false)
 
     useEffect(()=>{
         const onScrollFunction=()=>{

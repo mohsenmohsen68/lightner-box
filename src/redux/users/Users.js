@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getUsersFromServer = createAsyncThunk(
   "users/getUsersFromServer",
-  async (url: string) => {
+  async (url) => {
     return fetch(url)
       .then((res) => res.json())
       .then((data) => data);
@@ -12,7 +12,8 @@ export const getUsersFromServer = createAsyncThunk(
 export const createANewUser = createAsyncThunk(
   "users/createANewUser",
   async (userBody) => {
-    return fetch("/api/user", {
+    console.log("redux : ", userBody);
+    return fetch("/api/user/route", {
       method: "POST",
       body: JSON.stringify(userBody),
       headers: {
@@ -40,6 +41,11 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
+export const logOutUser = createAsyncThunk("users/logOutUser", async () => {
+  return fetch("/api/auth/signout")
+    .then((res) => res.json())
+    .then((data) => data);
+});
 export const loginUser = createAsyncThunk(
   "users/loginUser",
   async (userBody) => {
@@ -55,6 +61,11 @@ export const loginUser = createAsyncThunk(
       .then((data) => data);
   }
 );
+export const me = createAsyncThunk("users/me", async () => {
+  return fetch("/api/auth/me")
+    .then((res) => res.json())
+    .then((data) => data);
+});
 
 export const updateUser = createAsyncThunk(
   "users/updateUser",
@@ -74,11 +85,18 @@ export const updateUser = createAsyncThunk(
 
 const slice = createSlice({
   name: "users",
-  initialState: [],
-  reducers: {},
+  initialState: {isUserLogged:false},
+  reducers: {
+    userLogesIn:(state,action)=>{
+      return {isUserLogged:true}
+    },
+    userLogesOut:(state,action)=>{
+      return {isUserLogged:false}
+    }
+  },
 
   extraReducers: (builder) => {
-    builder.addCase(getUsersFromServer.fulfilled, (state: people[], action) => {
+    builder.addCase(getUsersFromServer.fulfilled, (state, action) => {
       console.log("action data : ", action.payload.data);
       return action.payload.data;
       // state.concat(...action.payload.data);
@@ -91,7 +109,15 @@ const slice = createSlice({
       console.log("state : ", state);
       console.log("action : ", action);
     });
+    builder.addCase(me.fulfilled, (state, action) => {
+      console.log("state : ", state);
+      console.log("action : ", action);
+    });
     builder.addCase(loginUser.fulfilled, (state, action) => {
+      console.log("state : ", state);
+      console.log("action : ", action);
+    });
+    builder.addCase(logOutUser.fulfilled, (state, action) => {
       console.log("state : ", state);
       console.log("action : ", action);
     });
@@ -103,3 +129,4 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
+export const {userLogesOut, userLogesIn} = slice.actions;
