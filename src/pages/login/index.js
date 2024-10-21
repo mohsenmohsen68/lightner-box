@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser, userLogesIn } from "@/redux/users/Users";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
@@ -22,7 +22,16 @@ const Index = () => {
 const [phoneNumber,setPhoneNumber] = useState('');
 const [password,setPassword] = useState('');
 const dispatch = useDispatch()
+const mystate = useSelector(state=>state)
 const router = useRouter()
+
+useEffect(()=>{
+  const islogged = mystate.user.isUserLogged
+  console.log("state",mystate.user.isUserLogged)
+if(islogged){
+  router.push('/userpage')
+}
+},[])
 
 const loginHandler = async (event)=>{
 event.preventDefault();

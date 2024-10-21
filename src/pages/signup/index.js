@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SignUpModule from "@/components/SignUp/SignUpModule";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 const Index = () => {
+
+  const mystate = useSelector(state=>state)
+  const router = useRouter()
+  useEffect(()=>{
+    const islogged = mystate.user.isUserLogged
+    console.log("state",mystate.user.isUserLogged)
+  if(islogged){
+    router.push('/userpage')
+  }
+  },[])
+
   return (
     <div className='w-full h-dvh flex justify-center items-center flex-col font-moraba'>
       <div className='flex flex-col justify-center items-center'>
