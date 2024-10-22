@@ -12,6 +12,19 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { createANewCourse } from "@/redux/course/course";
+import Swal from "sweetalert2";
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "bottom-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
 
 const style = {
   position: "absolute",
@@ -34,11 +47,32 @@ function index() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const clickHandler = () => {
+  const clickHandler = async() => {
     console.log("box name : ", boxName);
     const userID = userData._id;
     const boxBody = {boxName, userID}
-    const res = dispatch(createANewCourse(boxBody))
+    const res = await dispatch(createANewCourse(boxBody))
+    if(res.payload.status === 200){
+      Toast.fire({
+        toast: true,
+        customClass: {
+          title: "font-moraba"
+        },
+        position: "bottom-end",
+        title: " باکس شما با موفقیت ثبت شد ...",
+        icon: "success"
+      });
+    }else{
+      Toast.fire({
+        toast: true,
+        customClass: {
+          title: "font-moraba"
+        },
+        position: "bottom-end",
+        title: " مشکلی در سمت سرور رخ داده است ...",
+        icon: "error"
+      });
+    }
     console.log("res : ", res)
     handleClose();
   };

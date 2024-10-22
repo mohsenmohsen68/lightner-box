@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const getCoursesFromServer = createAsyncThunk(
   "courses/getCoursesFromServer",
   async (teacherID) => {
-    return fetch('/api/course/route')
+    return fetch(`/api/course/route?teacherID=${teacherID}`)
       .then((res) => res.json())
       .then((data) => data);
   }
