@@ -1,12 +1,9 @@
 import mongoose from 'mongoose'
 import courseModel from './course'
+import userModel from './user'
 
 const schema = mongoose.Schema({
-    category: {
-        type: String,
-        required: true,
-    },
-
+    
     question: {
         type : String,
         required: true,
@@ -18,11 +15,16 @@ const schema = mongoose.Schema({
     course : {
         type: mongoose.Types.ObjectId,
         required: true,
-        ref: COURSE,
+        ref: courseModel,
+    },
+    user : {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: userModel,
     }
 
 })
 
-const userModel = mongoose.models.CARD  || mongoose.model("CARD", schema)
+const cardModel = mongoose.models.CARD  || mongoose.model("CARD", schema)
 
-export default userModel
+export default cardModel
