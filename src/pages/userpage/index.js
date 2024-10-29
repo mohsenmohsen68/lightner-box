@@ -39,6 +39,9 @@ const style = {
 };
 
 function index() {
+  
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [boxName, setBoxName] = useState("");
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -77,8 +80,6 @@ function index() {
     handleClose();
   };
 
-  const dispatch = useDispatch();
-  const router = useRouter();
   useEffect(() => {
     const a = async () => {
       const result = await dispatch(me());

@@ -3,9 +3,9 @@ import connectToDB from "@/utils/connectToDB";
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
-    console.log("my request : ", req.query.teacherID);
+    console.log("my request : ", req.query.userID);
     try {
-      const courseFound = await courseModel.find({ user: req.query.teacherID });
+      const courseFound = await courseModel.find({ user: req.query.userID });
       return res.json({
         message: "the boxes found. ",
         data: courseFound,

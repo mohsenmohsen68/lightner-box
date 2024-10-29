@@ -2,8 +2,17 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getCoursesFromServer = createAsyncThunk(
   "courses/getCoursesFromServer",
-  async (teacherID) => {
-    return fetch(`/api/course/route?teacherID=${teacherID}`)
+  async (userID) => {
+    return fetch(`/api/course/route?userID=${userID}`)
+      .then((res) => res.json())
+      .then((data) => data);
+  }
+);
+export const getCourseTitle = createAsyncThunk(
+  "courses/getCourseTitle",
+  async (courseID) => {
+    console.log("front : ", courseID)
+    return fetch(`/api/course?courseID=${courseID}`)
       .then((res) => res.json())
       .then((data) => data);
   }
@@ -48,6 +57,11 @@ const slice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(getCoursesFromServer.fulfilled, (state, action) => {
+      console.log("action data : ", action.payload.data);
+      return action.payload.data;
+      // state.concat(...action.payload.data);
+    });
+    builder.addCase(getCourseTitle.fulfilled, (state, action) => {
       console.log("action data : ", action.payload.data);
       return action.payload.data;
       // state.concat(...action.payload.data);

@@ -12,7 +12,6 @@ function index() {
   const [userCourses, setUserCourses] = useState([]);
   const dispatch = useDispatch()
   const data = useSelector(state => state)
-  console.log('data : ',data)
   useEffect(()=>{
     const a = async () => {
       const result = await dispatch(me());
@@ -22,7 +21,7 @@ function index() {
        console.log('course result : ', coursesRes)
        setUserCourses(coursesRes.payload.data)
       } else {
-       setUserData({});
+       setUserData({});8
       }
     };
     a();
