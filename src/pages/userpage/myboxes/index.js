@@ -21,7 +21,7 @@ function index() {
        console.log('course result : ', coursesRes)
        setUserCourses(coursesRes.payload.data)
       } else {
-       setUserData({});8
+       setUserData({});
       }
     };
     a();

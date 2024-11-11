@@ -8,8 +8,7 @@ import { CiLogin } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
 import { PiSunThin } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
-import { logOutUser, userLogesOut } from "@/redux/users/Users";
-import { UseSelector } from "react-redux";
+import { logOutUser, me, userLogesIn, userLogesOut } from "@/redux/users/Users";
 
 const Header = () => {
   const router = useRouter();
@@ -17,6 +16,19 @@ const Header = () => {
   console.log("userStatus : ",userStatus,userStatus.user.isUserLogged)
   const dispatch = useDispatch()
   const pathname = usePathname();
+
+  
+  useEffect(()=>{
+  const userSatusChecker = async () => {
+    const result = await dispatch(me());
+    if (result.payload.status === 200) {
+       dispatch(userLogesIn())
+      }else{
+       dispatch(userLogesOut())    
+    }
+  }
+  userSatusChecker()
+},[])
 
   return (
     <div className='w-full h-20 flex items-center justify-center font-moraba-medium shadow-emerald-400 shadow-sm '>
@@ -39,7 +51,7 @@ const Header = () => {
             pathname === "/help" ? styles.active : ""
           }`}
         >
-          راهنمایی
+         جعبه لایتنر
         </Link>
         <Link
           href={"/aboutus"}
@@ -47,7 +59,7 @@ const Header = () => {
             pathname === "/aboutus" ? styles.active : ""
           }`}
         >
-          درباره ما
+برنامه ریزی درسی
         </Link>
         <Link
           href={"/login"}

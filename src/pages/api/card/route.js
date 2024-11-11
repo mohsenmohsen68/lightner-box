@@ -53,48 +53,64 @@ const handler = async (req, res) => {
     });
   } else if (req.method === "PUT") {
     connectToDB();
-    const { question, answer, score, courseID, userID,correct } = JSON.parse(req.body);
+    const { question, answer, score, courseID, userID, correct } = JSON.parse(
+      req.body
+    );
     console.log("ttt", question, answer, score, courseID, userID, correct);
     let newScore = 0;
-    if(correct){
-         newScore = score + 1
-    }else{
-         newScore = 1
+    if (correct) {
+      if (score == 1) {
+        newScore = 21;
+      } else if (score === 22) {
+        newScore = 31;
+      } else if (score === 34) {
+        newScore = 41;
+      } else if (score === 48) {
+        newScore = 51;
+      } else if (score === 66) {
+        newScore = 6;
+      }else{
+        newScore = score + 1;
+      }
+    } else {
+      newScore = 1;
     }
-    const card = await cardModel.findOneAndUpdate({
-      question,
-      answer,
-      score,
-      user: userID,
-      course: courseID
-    },{
-      question,
-      answer,
-      user: userID,
-      course: courseID,
-      score: newScore,
-    });
-    console.log("card..", card)
-    if(card){
-        return res.json({
-          message: "فلش کارت با موفقیت بروز شد ...",
-          status: 200
-        });
+    const card = await cardModel.findOneAndUpdate(
+      {
+        question,
+        answer,
+        score,
+        user: userID,
+        course: courseID
+      },
+      {
+        question,
+        answer,
+        user: userID,
+        course: courseID,
+        score: newScore
+      }
+    );
+    console.log("card..", card);
+    if (card) {
+      return res.json({
+        message: "فلش کارت با موفقیت بروز شد ...",
+        status: 200
+      });
     }
   } else if (req.method === "DELETE") {
-    connectToDB()
-    console.log("cardID : ...",req.query.cardID)
+    connectToDB();
+    console.log("cardID : ...", req.query.cardID);
     const cardID = req.query.cardID;
-    try{
-        const result = await cardModel.findOneAndDelete({_id : cardID})
-        console.log("result", result)
-        return res.json({message:'کارت مورد نظر حذف گردید ...', status:200})
-    }catch(err){
-        return res.json({message:err, status:200})
+    try {
+      const result = await cardModel.findOneAndDelete({ _id: cardID });
+      console.log("result", result);
+      return res.json({ message: "کارت مورد نظر حذف گردید ...", status: 200 });
+    } catch (err) {
+      return res.json({ message: err, status: 200 });
     }
 
     // console.log("ttt", question, answer, score, courseID, userID, correct);
-
   }
 };
 

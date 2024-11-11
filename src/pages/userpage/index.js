@@ -11,8 +11,12 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { createANewCourse } from "@/redux/course/course";
+import { GiSandsOfTime } from "react-icons/gi";
+import { createANewCourse, getCoursesFromServer } from "@/redux/course/course";
 import Swal from "sweetalert2";
+import { BsCalendar2Week } from "react-icons/bs";
+import { getCartsOfAUser } from "@/redux/card/card";
+import { LuListTodo } from "react-icons/lu";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -46,6 +50,8 @@ function index() {
   const [boxName, setBoxName] = useState("");
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+  const [numberOfCourses, setNumberOfCourses] = useState(0)
+  const [numberOfCarts, setNumberOfCarts] = useState(0)
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -85,9 +91,13 @@ function index() {
       const result = await dispatch(me());
       console.log("result", result);
       if (result.payload.status === 200) {
+        const coursesRes = await dispatch(getCoursesFromServer(result.payload.data._id))
+        setNumberOfCourses(coursesRes.payload.data.length)
         setIsUserLoggedIn(true);
         dispatch(userLogesIn());
         setUserData(result.payload.data);
+        const carts = await dispatch(getCartsOfAUser(result.payload.data._id))
+        setNumberOfCarts(carts.payload.data.length)
       } else {
         setIsUserLoggedIn(false);
         dispatch(userLogesOut());
@@ -106,11 +116,11 @@ function index() {
         </div>
         <div className='flex flex-col w-1/3 justify-center items-center'>
           <div>تعداد جعبه ها</div>
-          <div>5</div>
+          <div>{numberOfCourses}</div>
         </div>
         <div className='flex justify-center  items-center w-1/3 flex-col'>
           <div>تعداد سوال‌ها</div>
-          <div>{2500}</div>
+          <div>{numberOfCarts}</div>
         </div>
       </div>
       <div className=' flex gap-3 mt-3 font-moraba-medium text-white  mx-0 sm:mx-10'>
@@ -127,6 +137,22 @@ function index() {
         >
           <div className='text-black'>اضافه کردن جعبه جدید</div>
           <FaBoxOpen className='text-6xl' />
+        </div>
+      </div>
+      <div className=' flex gap-3 mt-3 font-moraba-medium text-white  mx-0 sm:mx-10'>
+        <div
+          onClick={() => router.push("/userpage/myboxes")}
+          className='flex justify-center gap-5 items-center h-full bg-red-500 w-1/2 py-5 hover:bg-red-400 hover:cursor-pointer'
+        >
+          <div className='text-black'>مطالعه ی متمرکز</div>
+          <GiSandsOfTime className='text-6xl' />
+        </div>
+        <div
+          onClick={handleOpen}
+          className='flex justify-center items-center gap-5 bg-lime-500 hover:bg-lime-400 hover:cursor-pointer w-1/2 py-5'
+        >
+          <div className='text-black'>برنامه هفتگی</div>
+          <BsCalendar2Week className='text-6xl' />
         </div>
       </div>
 
