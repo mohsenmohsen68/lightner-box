@@ -17,6 +17,9 @@ import Swal from "sweetalert2";
 import { BsCalendar2Week } from "react-icons/bs";
 import { getCartsOfAUser } from "@/redux/card/card";
 import { LuListTodo } from "react-icons/lu";
+import { CgGoogleTasks } from "react-icons/cg";
+import { VscTasklist } from "react-icons/vsc";
+import { BiTask } from "react-icons/bi";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -141,18 +144,43 @@ function index() {
       </div>
       <div className=' flex gap-3 mt-3 font-moraba-medium text-white  mx-0 sm:mx-10'>
         <div
-          onClick={() => router.push("/userpage/myboxes")}
-          className='flex justify-center gap-5 items-center h-full bg-red-500 w-1/2 py-5 hover:bg-red-400 hover:cursor-pointer'
+          onClick={() => router.push("/userpage/concentratestudy")}
+          className='flex justify-center gap-5 items-center h-full bg-lime-500 w-1/2 py-5 hover:bg-lime-400 hover:cursor-pointer'
         >
           <div className='text-black'>مطالعه ی متمرکز</div>
           <GiSandsOfTime className='text-6xl' />
         </div>
         <div
-          onClick={handleOpen}
-          className='flex justify-center items-center gap-5 bg-lime-500 hover:bg-lime-400 hover:cursor-pointer w-1/2 py-5'
+          onClick={() =>router.push("/userpage/weeklyschedule")}
+          className='flex justify-center items-center gap-5 bg-red-500 hover:bg-red-400 hover:cursor-pointer w-1/2 py-5'
         >
-          <div className='text-black'>برنامه هفتگی</div>
+          <div className='text-black' onClick={() =>router.push("/userpage/weeklyschedule")}>برنامه هفتگی</div>
           <BsCalendar2Week className='text-6xl' />
+        </div>
+      </div>
+     
+     
+      <div className=' flex gap-3 mt-3 font-moraba-medium text-white  mx-0 sm:mx-10'>
+        <div
+          onClick={() => router.push("/userpage/dailytasks")}
+          className='flex justify-center gap-5 items-center h-full bg-rose-500 w-1/2 py-5 hover:bg-rose-400 hover:cursor-pointer'
+        >
+          <div className='text-black'>لیست کارهای روزانه</div>
+          <CgGoogleTasks className='text-6xl' />
+        </div>
+        <div
+          onClick={() => router.push("/userpage/weeklytasks")}
+          className='flex justify-center gap-5 items-center h-full bg-fuchsia-500 w-1/2 py-5 hover:bg-fuchsia-400 hover:cursor-pointer'
+        >
+          <div className='text-black'>لیست کارهای هفتگی</div>
+          <VscTasklist className='text-6xl' />
+        </div>
+        <div
+          onClick={() =>router.push("/userpage/monthlytasks")}
+          className='flex justify-center items-center gap-5 bg-indigo-500 hover:bg-indigo-400 hover:cursor-pointer w-1/2 py-5'
+        >
+          <div className='text-black' onClick={() =>router.push("/userpage/weeklyschedule")}>لیست کارهای ماهانه</div>
+          <BiTask className='text-6xl' />
         </div>
       </div>
 
