@@ -46,7 +46,7 @@ const style = {
 };
 
 function index() {
-  
+
   const dispatch = useDispatch();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -59,12 +59,12 @@ function index() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const clickHandler = async() => {
+  const clickHandler = async () => {
     console.log("box name : ", boxName);
     const userID = userData._id;
-    const boxBody = {boxName, userID}
+    const boxBody = { boxName, userID }
     const res = await dispatch(createANewCourse(boxBody))
-    if(res.payload.status === 200){
+    if (res.payload.status === 200) {
       Toast.fire({
         toast: true,
         customClass: {
@@ -74,7 +74,7 @@ function index() {
         title: " باکس شما با موفقیت ثبت شد ...",
         icon: "success"
       });
-    }else{
+    } else {
       Toast.fire({
         toast: true,
         customClass: {
@@ -151,36 +151,22 @@ function index() {
           <GiSandsOfTime className='text-6xl' />
         </div>
         <div
-          onClick={() =>router.push("/userpage/weeklyschedule")}
+          onClick={() => router.push("/userpage/weeklyschedule")}
           className='flex justify-center items-center gap-5 bg-red-500 hover:bg-red-400 hover:cursor-pointer w-1/2 py-5'
         >
-          <div className='text-black' onClick={() =>router.push("/userpage/weeklyschedule")}>برنامه هفتگی</div>
+          <div className='text-black' onClick={() => router.push("/userpage/weeklyschedule")}>برنامه هفتگی</div>
           <BsCalendar2Week className='text-6xl' />
         </div>
       </div>
-     
-     
+
+
       <div className=' flex gap-3 mt-3 font-moraba-medium text-white  mx-0 sm:mx-10'>
         <div
           onClick={() => router.push("/userpage/dailytasks")}
-          className='flex justify-center gap-5 items-center h-full bg-rose-500 w-1/2 py-5 hover:bg-rose-400 hover:cursor-pointer'
+          className='flex justify-center gap-5 items-center h-full bg-yellow-300 w-full py-5 hover:bg-yellow-200 hover:cursor-pointer'
         >
-          <div className='text-black'>لیست کارهای روزانه</div>
+          <div className='text-black'>لیست کارهای در برنامه‌ی انجام</div>
           <CgGoogleTasks className='text-6xl' />
-        </div>
-        <div
-          onClick={() => router.push("/userpage/weeklytasks")}
-          className='flex justify-center gap-5 items-center h-full bg-fuchsia-500 w-1/2 py-5 hover:bg-fuchsia-400 hover:cursor-pointer'
-        >
-          <div className='text-black'>لیست کارهای هفتگی</div>
-          <VscTasklist className='text-6xl' />
-        </div>
-        <div
-          onClick={() =>router.push("/userpage/monthlytasks")}
-          className='flex justify-center items-center gap-5 bg-indigo-500 hover:bg-indigo-400 hover:cursor-pointer w-1/2 py-5'
-        >
-          <div className='text-black' onClick={() =>router.push("/userpage/weeklyschedule")}>لیست کارهای ماهانه</div>
-          <BiTask className='text-6xl' />
         </div>
       </div>
 

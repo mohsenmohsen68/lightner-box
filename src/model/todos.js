@@ -14,6 +14,14 @@ const schema = mongoose.Schema({
         type: String,
         required: true
     },
+    deadLine: {
+        type: Date,
+        required: true
+    },
+    notify: {
+        type: Boolean,
+        required: true
+    },
     user: {
         type: mongoose.Types.ObjectId,
         required: true,

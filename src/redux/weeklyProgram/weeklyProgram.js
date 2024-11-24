@@ -10,7 +10,7 @@ export const getProgramFromServer = createAsyncThunk(
 );
 
 export const updateProgram = createAsyncThunk(
-  "Program/updateUser",
+  "Program/updateProgram",
   async (Body) => {
     console.log("nnnn : ", Body);
     return fetch("/api/program", {
